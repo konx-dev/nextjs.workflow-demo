@@ -1,8 +1,6 @@
 # Next.js Application with Docker and OrbStack
 
-This project is a modern Next.js application built with the App Router, TypeScript, and Tailwind CSS. The entire development environment is containerized using Docker and OrbStack for a consistent and high-performance developer experience.
-
-The goal of this project is to create a seamless workflow from local to production.
+The entire development environment is containerized using Docker and OrbStack for a consistent and high-performance developer experience. The goal of this project is to create a seamless workflow from local to production.
 
 ## Why a Containerized Development Environment?
 
@@ -22,10 +20,7 @@ For this project, I recommend using OrbStack on macOS or Linux for a superior ex
 
 ## Prerequisites
 
-To run this project, you will need:
-
-* OrbStack: (Recommended for macOS and Linux) Install it from orbstack.dev.
-* Docker Desktop: (If you prefer not to use OrbStack, or are on Windows) Install from the official Docker website.
+To run this project, you will need OrbStack or Docker Desktop
 
 ## Getting Started
 
@@ -35,7 +30,7 @@ The project uses a docker-compose.yml file to define the development environment
 
 ```docker-compose up --build```
 
-Note: If you are a long-term developer on this project, you can omit the --build flag on subsequent runs for faster startup: docker-compose up.
+Note: You can omit the --build flag on subsequent runs for faster startup: docker-compose up.
 
 ### Access the Application
 
@@ -48,3 +43,17 @@ Once the containers are up and running, you can access the application in your b
 * Committing Changes: All project files exist on your local machine, outside of the Docker container. This allows you to use your preferred IDE's Git tools or the command line to stage, commit, and push your changes to GitHub as you normally would.
 
 * Stopping the Containers: To stop the running containers, simply press Ctrl + C in your terminal. To stop and remove the containers, run: `docker-compose down`
+
+## Further Information
+
+* GitHub branch protection on both master & staging.
+* Dependabot alerts for package vunerabilities.
+
+## Branch naming
+
+* `/feat`: New features
+* `/fix`: Bug fixes in dev/staging/prod
+* `/docs`: Doc changes such as readme or component
+* `/chore`: Housekeeping, dependency updates, build config
+* `/refactor`: Code restructure, no functionality changes
+* `/test`: Adding or modifying tests
