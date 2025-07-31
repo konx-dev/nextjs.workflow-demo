@@ -1,36 +1,50 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Next.js Application with Docker and OrbStack
+
+This project is a modern Next.js application built with the App Router, TypeScript, and Tailwind CSS. The entire development environment is containerized using Docker and OrbStack for a consistent and high-performance developer experience.
+
+The goal of this project is to create a seamless workflow from local to production.
+
+## Why a Containerized Development Environment?
+
+Containerizing a development environment offers several key advantages over installing Node.js directly on your system:
+
+* Consistency: The application runs in a predefined environment (the Docker image), ensuring that all developers on the team are using the exact same versions of Node.js (v22), npm, and other dependencies. This eliminates the "it works on my machine" problem.
+
+* Isolation: The containerized environment is isolated from your host machine's system. You can have multiple projects with different Node.js versions and dependencies without them conflicting with each other. This is especially useful for projects that require older Node.js versions.
+
+* Version Management: Tools like nvm are great for managing different Node.js versions on your system. However, a container ensures that the project-specific version is always used, even if your global nvm alias is set to a different version. This removes the need for manual version switching.
+
+* Cleanliness: Your host machine remains clean of project-specific dependencies. The node_modules folder and its thousands of files live inside the container, not on your local file system, which can be a significant performance and resource-saving benefit.
+
+* Portability: The project can be run on any machine with Docker (or a compatible tool like OrbStack) installed, making it easy to onboard new team members or move development to a different computer.
+
+For this project, I recommend using OrbStack on macOS or Linux for a superior experience. It's a faster, more lightweight drop-in replacement for Docker Desktop with better file system performance, which is crucial for Next.js's Hot Module Replacement (HMR).
+
+## Prerequisites
+
+To run this project, you will need:
+
+* OrbStack: (Recommended for macOS and Linux) Install it from orbstack.dev.
+* Docker Desktop: (If you prefer not to use OrbStack, or are on Windows) Install from the official Docker website.
 
 ## Getting Started
 
-First, run the development server:
+### Start the Docker Containers
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+The project uses a docker-compose.yml file to define the development environment. This command will build the Docker image (using Node.js v22) and start the Next.js development server. The --build flag is important for the first time you run it.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+```docker-compose up --build```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Note: If you are a long-term developer on this project, you can omit the --build flag on subsequent runs for faster startup: docker-compose up.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Access the Application
 
-## Learn More
+Once the containers are up and running, you can access the application in your browser at: `http://localhost:3000`
 
-To learn more about Next.js, take a look at the following resources:
+## Development Workflow
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+* Hot Module Replacement (HMR): The development setup is configured for HMR. Any changes you make to the source files on your local machine will be automatically synchronized with the container, and the changes will appear instantly in your browser without a manual refresh.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+* Committing Changes: All project files exist on your local machine, outside of the Docker container. This allows you to use your preferred IDE's Git tools or the command line to stage, commit, and push your changes to GitHub as you normally would.
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+* Stopping the Containers: To stop the running containers, simply press Ctrl + C in your terminal. To stop and remove the containers, run: `docker-compose down`
