@@ -48,3 +48,12 @@ Once the containers are up and running, you can access the application in your b
 
 * GitHub branch protection on both master & staging.
 * Dependabot alerts for package vunerabilities.
+
+## Branch naming
+
+* `/feat`: New features
+* `/fix`: Bug fixes in dev/staging/prod
+* `/docs`: Doc changes such as readme or component
+* `/chore`: Housekeeping, dependency updates, build config
+* `/refactor`: Code restructure, no functionality changes
+* `/test`: Adding or modifying tests
